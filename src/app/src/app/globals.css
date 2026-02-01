@@ -1,0 +1,158 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #FFFFFF;
+  --foreground: #4F5E7B;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+/* Performance: Content visibility for long lists (5-10x faster initial render) */
+.content-visibility-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 80px;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #FFFFFF;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #E5E7EB;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #1a2fee;
+}
+
+/* Lenis Smooth Scroll */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* Boring Mode */
+body.boring-mode {
+  background: #ffffff !important;
+  color: #000000 !important;
+}
+
+body.boring-mode * {
+  animation: none !important;
+  transition: none !important;
+  backdrop-filter: none !important;
+  box-shadow: none !important;
+  background-image: none !important;
+  transform: none !important;
+}
+
+body.boring-mode canvas {
+  display: none !important;
+}
+
+body.boring-mode header,
+body.boring-mode footer,
+body.boring-mode section,
+body.boring-mode div {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border-color: #e5e5e5 !important;
+}
+
+body.boring-mode .text-chalk,
+body.boring-mode .text-white,
+body.boring-mode .text-gray-300,
+body.boring-mode .text-gray-400,
+body.boring-mode .text-gold,
+body.boring-mode .text-ethereal {
+  color: #000000 !important;
+}
+
+body.boring-mode .bg-obsidian {
+  background-color: #ffffff !important;
+}
+
+/* Infinite Scroll Animation - GPU Accelerated */
+@keyframes scroll {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(-33.33333%, 0, 0);
+  }
+}
+
+.animate-scroll {
+  animation: scroll 15s linear infinite;
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform-style: preserve-3d;
+}
+
+/* Shimmer Animation for skeleton loading */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.animate-shimmer {
+  animation: shimmer 2s ease-in-out infinite;
+  background-size: 200% 100%;
+}
+
+/* Text selection highlight color - brand blue */
+::selection {
+  background-color: #1a2fee;
+  color: #ffffff;
+}
+
+::-moz-selection {
+  background-color: #1a2fee;
+  color: #ffffff;
+}
+
+/* Preserve default selection in form inputs for better UX */
+input::selection,
+textarea::selection {
+  background-color: #b3d4fc;
+  color: inherit;
+}
+
+input::-moz-selection,
+textarea::-moz-selection {
+  background-color: #b3d4fc;
+  color: inherit;
+}

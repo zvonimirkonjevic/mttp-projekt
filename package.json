@@ -1,0 +1,11 @@
+{
+  "name": "slides-ai",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "cd src/app && npm run dev",
+    "build": "cd src/app && npm run build",
+    "start": "cd src/app && npm run start",
+    "lint": "cd src/app && npm run lint"
+  }
+}

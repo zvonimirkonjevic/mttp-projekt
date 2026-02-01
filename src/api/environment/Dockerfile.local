@@ -1,0 +1,31 @@
+FROM mcr.microsoft.com/playwright/python:v1.40.0-jammy
+
+RUN pip install -U pip
+
+WORKDIR /app
+RUN mkdir -p /app/static/vendor
+
+RUN curl -sSL -o /app/static/vendor/react.production.min.js \
+    https://unpkg.com/react@18.2.0/umd/react.production.min.js && \
+    curl -sSL -o /app/static/vendor/react-dom.production.min.js \
+    https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js && \
+    curl -sSL -o /app/static/vendor/babel.min.js \
+    https://unpkg.com/@babel/standalone@7.23.5/babel.min.js && \
+    curl -sSL -o /app/static/vendor/gsap.min.js \
+    https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js && \
+    curl -sSL -o /app/static/vendor/gsap-react.js \
+    https://unpkg.com/@gsap/react@2.1.0/dist/index.js && \
+    curl -sSL -o /app/static/vendor/tailwindcss.js \
+    https://cdn.tailwindcss.com/3.4.0
+
+RUN ls -lh /app/static/vendor/ && \
+    echo "Total vendor assets size:" && \
+    du -sh /app/static/vendor/
+
+COPY ./src/api/environment/requirements.txt   api/requirements.txt
+COPY ./src/common ./common
+RUN pip install -r api/requirements.txt
+
+WORKDIR /
+
+CMD uvicorn api.src.api_service_layer_main:app --host 0.0.0.0 --port 3001 --reload
